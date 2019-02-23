@@ -9,6 +9,7 @@ DISPTYPE = 'psychopy'
 DISPSIZE = (1440, 900)
 
 # DUMMYMODE should be True if no tracker is attached
+# DUMMYMODE = False
 DUMMYMODE = True
 
 # Set the TRACKERTYPE to the brand you use
@@ -28,4 +29,4 @@ FIXTIME = 5000
 IMGTIME = 500
 
 # Get the path to the current folder
-DIR = os.path.dirname(__file__)
+DIR = os.path.dirname(os.path.abspath(__file__))
