@@ -1,7 +1,9 @@
 import os
 
+# Get the path to the current folder
+DIR = os.path.dirname(os.path.abspath(__file__))
+
 # DUMMYMODE should be True if no tracker is attached
-# DUMMYMODE = False
 DUMMYMODE = True
 
 # Get Participant ID for logfile
@@ -9,11 +11,9 @@ LOGFILENAME = raw_input("Participant ID: ")
 LOGFILE = LOGFILENAME[:]
 
 # The DISPTYPE can be either 'pygame' or 'psychopy'
-# DISPTYPE = 'psychopy'
-DISPTYPE = "pygame"
+DISPTYPE = "psychopy"
 
 # The DISPSIZE should match your monitor's resolution
-# DISPSIZE = (1920, 1080)
 DISPSIZE = (1440, 900)
 
 # Set the TRACKERTYPE to the brand you use
@@ -28,11 +28,11 @@ COLORS = {"darkgreen": (0, 100, 0),
           "lime": (0, 255, 0),
           "lightgray": (211, 211, 211),
           "silver": (192, 192, 192),
-          "gray": (169, 169, 169),
-          "darkgray": (128, 128, 128)}
+          "darkgray": (169, 169, 169),
+          "gray": (128, 128, 128)}
 
 # Foreground colour set to lime
-FGC = COLORS["lime"]
+FGC = COLORS["green"]
 
 # Background colour set to darkgray
 BGC = COLORS["darkgray"]
@@ -43,5 +43,15 @@ FIXTIME = 5000
 # Image time (milliseconds)
 IMGTIME = 500
 
-# Get the path to the current folder
-DIR = os.path.dirname(os.path.abspath(__file__))
+# Number of trials
+while True:
+    try:
+        NUMTRIALS = int(raw_input("Number of trials: "))
+    except ValueError:
+        print "Invalid input: non-integer value"
+        continue
+    if NUMTRIALS < 1 or NUMTRIALS > 100:
+        print "Invalid input: out of range, select from 1 to 100 trials"
+        continue
+    else:
+        break
