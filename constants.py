@@ -11,7 +11,7 @@ LOGFILENAME = raw_input('Participant ID: ')
 LOGFILE = os.path.join('trials', LOGFILENAME)
 
 # The DISPTYPE can be either 'pygame' or 'psychopy'
-DISPTYPE = 'pygame'
+DISPTYPE = 'psychopy'
 
 # The DISPSIZE should match your monitor's resolution
 DISPSIZE = (1440, 900)
