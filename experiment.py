@@ -19,8 +19,8 @@ disp = Display()
 
 # Initialize Logfile for saving text data
 log = Logfile()
-header = ['trialnum', 'fixonset (ms)', 'imgonset (ms)', 'imgoffset (ms)',
-          'presstime (ms)', 'deltatime (ms)', 'trueletter', 'userletter']
+header = ['trialnum', 'fixonset(ms)', 'imgonset(ms)', 'imgoffset(ms)',
+          'presstime(ms)', 'deltatime(ms)', 'trueletter', 'userletter']
 log.write(header)
 
 # Initialize Keyboard to collect key presses
@@ -29,7 +29,7 @@ kb = Keyboard(keylist=None, timeout=None)
 # Create Screen for task instructions
 inscr = Screen()
 inscr.draw_text(
-            text='-Instructions-\nPress ENTER to pick a letter.\n' +
+            text='Instructions:\nPress ENTER to pick a letter.\n' +
                  'You may press ESCAPE at any time to end the program.\n' +
                  '(Press any key to continue)',
             fontsize=24)
@@ -66,7 +66,7 @@ for n in range(1, NUMTRIALS + 1):
     trialscr.draw_text(
                     text='Trial #%s\n' % n +
                          'wait until letters appear and press enter when ' +
-                         'you feel the urge to\n(Press any key to begin)',
+                         'you feel the urge to.\n(Press any key to begin)',
                     fontsize=24)
     disp.fill(trialscr)
     disp.show()
@@ -107,9 +107,7 @@ for n in range(1, NUMTRIALS + 1):
         tracker.log('IMAGE ONSET, letter=%s' % letter)
 
         # Handle input
-        key, press = kb.get_key(
-                                keylist=['return', 'escape'],
-                                timeout=IMGTIME)
+        key, press = kb.get_key(keylist=['return', 'escape'], timeout=IMGTIME)
         if key == 'return':
             presstime = press
             deltatime = presstime - img_onset
@@ -144,7 +142,7 @@ for n in range(1, NUMTRIALS + 1):
 
 # Notify end to participant then wait for key press
 inscr.clear()
-inscr.draw_text(text='All done!\n\n(Press any key to exit)', fontsize=24)
+inscr.draw_text(text='All done!\n(Press any key to exit)', fontsize=24)
 disp.fill(inscr)
 disp.show()
 kb.get_key()
