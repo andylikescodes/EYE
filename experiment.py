@@ -82,9 +82,7 @@ for n in range(1, NUMTRIALS + 1):
     disp.fill(fixscr)
     fix_onset = disp.show()
     tracker.log('FIXATION ONSET')
-    if kb.get_key(timeout=FIXTIME)[0] == 'escape':
-        tracker.stop_recording()
-        close_all(tracker, log, disp)
+    libtime.pause(FIXTIME)
 
     # Variable for timed loop termination
     afterpress = -1
