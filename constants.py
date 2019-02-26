@@ -8,10 +8,10 @@ DUMMYMODE = True
 
 # Get Participant ID for logfile
 LOGFILENAME = raw_input('Participant ID: ')
-LOGFILE = LOGFILENAME[:]
+LOGFILE = os.path.join('trials', LOGFILENAME)
 
 # The DISPTYPE can be either 'pygame' or 'psychopy'
-DISPTYPE = 'psychopy'
+DISPTYPE = 'pygame'
 
 # The DISPSIZE should match your monitor's resolution
 DISPSIZE = (1440, 900)
@@ -32,7 +32,7 @@ COLORS = {'darkgreen': (0, 100, 0),
           'gray': (128, 128, 128)}
 
 # Foreground colour set to lime
-FGC = COLORS['green']
+FGC = COLORS['lightgreen']
 
 # Background colour set to darkgray
 BGC = COLORS['darkgray']
