@@ -1,9 +1,9 @@
 import string
+from constants import *
 from pygaze import libtime
 from pygaze.eyetracker import EyeTracker
 from pygaze.libinput import Keyboard
 from pygaze.libscreen import Display, Screen
-from constants import *
 
 # Initialize Display to interact with monitor
 disp = Display()
@@ -68,15 +68,12 @@ for n in range(1, NUMTRIALS + 1):
         if pressed:
             break
 
-        # Prepare image Screen
-        imgscr.clear()
-        imgscr.draw_text(text=letter, fontsize=64)
-        tracker.log('IMAGE ONSET, letter=%s' % letter)
-
         # Display letter
+        imgscr.clear()
         imgscr.draw_text(text=letter, fontsize=64)
         disp.fill(imgscr)
         disp.show()
+        tracker.log('IMAGE ONSET, letter=%s' % letter)
 
         # Initialize timer for each letter
         t0 = libtime.get_time()
@@ -92,9 +89,9 @@ for n in range(1, NUMTRIALS + 1):
             pressed = True
 
         # Clear Display
-        tracker.log('IMAGE OFFSET, letter=%s' % letter)
         disp.fill()
         disp.show()
+        tracker.log('IMAGE OFFSET, letter=%s' % letter)
 
     # Log the end of trial
     tracker.log('TRIAL %s END' % n)
