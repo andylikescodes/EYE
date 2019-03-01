@@ -31,14 +31,14 @@ COLORS = {'darkgreen': (0, 100, 0),
           'darkgray': (169, 169, 169),
           'gray': (128, 128, 128)}
 
-# Foreground colour set to lime
+# Foreground color
 FGC = COLORS['lightgreen']
 
-# Background colour set to darkgray
+# Background color
 BGC = COLORS['darkgray']
 
 # Fixation mark time (milliseconds)
-FIXTIME = 5000
+FIXTIME = 3000
 
 # Image time (milliseconds)
 IMGTIME = 500
