@@ -159,7 +159,7 @@ for n in range(1, NUMTRIALS + 1):
         log.write([n, fixonset, imgonset, imgoffset, presstime,
                    deltatime, trueletter, userletter])
     else:
-        log.write([n, fixonset, imgonset, imgoffset, 'NaN',
+        log.write([n, fixonset, 'NaN', 'NaN', 'NaN',
                    'NaN', 'NaN', 'NaN'])
 
     # Log the end of trial
