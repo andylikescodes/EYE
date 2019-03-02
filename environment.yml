@@ -1,4 +1,4 @@
-name: eyetracker
+name: eye
 channels:
   - cogsci
   - defaults
@@ -56,5 +56,4 @@ dependencies:
   - zstd=1.3.7=h5bba6e5_0
   - pip:
     - python-pygaze==0.6.0a25
-prefix: /Users/blackbox/anaconda3/envs/eyetracker
-
+prefix: /Users/blackbox/anaconda3/envs/eye
