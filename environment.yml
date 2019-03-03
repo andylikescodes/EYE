@@ -1,6 +1,7 @@
 name: eye
 channels:
   - cogsci
+  - anaconda-fusion
   - defaults
 dependencies:
   - backports=1.0=py27_1
@@ -35,7 +36,6 @@ dependencies:
   - pillow=5.4.1=py27hb68e598_0
   - pip=19.0.3=py27_0
   - psychopy=1.82.01=py27_0
-  - pygame=1.9.2a0=py27_0
   - pyglet=1.2.4=py27_0
   - pyparsing=2.3.1=py27_0
   - python=2.7.15=h8f8e585_6
@@ -55,5 +55,7 @@ dependencies:
   - zlib=1.2.11=h1de35cc_3
   - zstd=1.3.7=h5bba6e5_0
   - pip:
+    - pygame==1.9.4
     - python-pygaze==0.6.0a25
-prefix: /Users/blackbox/anaconda3/envs/eye
+prefix: /anaconda/envs/eye
+
