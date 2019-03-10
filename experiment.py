@@ -35,7 +35,7 @@ disp = Display()
 # Initialize Logfile
 log = Logfile()
 header = ['trialnum', 'fixonset_ms', 'imgonset_ms', 'imgoffset_ms',
-          'presstime_ms', 'deltatime_ms', 'trueletter', 'userletter']
+          'presstime_ms', 'deltatime_ms', 'trueletter', 'userletter', 'sequence']
 log.write(header)
 
 # Initialize Keyboard
@@ -101,14 +101,21 @@ for n in range(1, TRIALS + 1):
     tracker.log('FIXATION ONSET')
     check_key(disp, quitscr, fixscr, keylist=['escape'], timeout=FIXTIME)
 
+    # list for storing letter sequence
+    sequence = []
+
     # Variables for delayed loop termination
     afterpress = -1
     keysave = None
 
+    # list of randomized alphabet to iterate through
+    alpha = ''.join(random.sample(string.ascii_lowercase, 26))
+
     # Show alphabet Screen on Display
-    for letter in ''.join(random.sample(
-                                    string.ascii_lowercase,
-                                    len(string.ascii_lowercase))):
+    for i in range(26):
+
+        # append letter to sequence list
+        sequence.append(alpha[i])
 
         # Check if pressed
         if afterpress > 0:
@@ -118,24 +125,25 @@ for n in range(1, TRIALS + 1):
 
         # Display letter
         imgscr.clear()
-        imgscr.draw_text(text=letter, fontsize=64)
+        imgscr.draw_text(text=alpha[i], fontsize=64)
         disp.fill(imgscr)
         if afterpress == -1:
             imgonset = disp.show()
         else:
             disp.show()
-        tracker.log('IMAGE ONSET, letter=%s' % letter)
+        tracker.log('IMAGE ONSET, letter=%s' % alpha[i])
 
         # Handle input
-        key, press = kb.get_key(keylist=['return', 'escape'], timeout=IMGTIME)
+        key, press = kb.get_key(keylist=['return', 'escape'],
+                                timeout=IMGTIME[i])
         if key == 'return':
             keysave = key
             presstime = press
             deltatime = presstime - imgonset
-            trueletter = letter
+            trueletter = alpha[i]
             afterpress = 2
             tracker.log('ACTION RECORDED, delta_t=%.2f ms' % deltatime)
-            libtime.pause(int(IMGTIME - deltatime))
+            libtime.pause(int(IMGTIME[i] - deltatime))
         if key == 'escape':
             disp.fill(quitscr)
             disp.show()
@@ -148,7 +156,7 @@ for n in range(1, TRIALS + 1):
             imgoffset = disp.show()
         else:
             disp.show()
-        tracker.log('IMAGE OFFSET, letter=%s' % letter)
+        tracker.log('IMAGE OFFSET, letter=%s, imgtime=%ims' % (alpha[i], int(IMGTIME[i])))
 
     # Ask participant for the letter they picked and log trial
     if keysave is not None:  # TODO: tests needed
@@ -157,10 +165,10 @@ for n in range(1, TRIALS + 1):
         disp.show()
         userletter = kb.get_key()[0]
         log.write([n, fixonset, imgonset, imgoffset, presstime,
-                   deltatime, trueletter, userletter])
+                   deltatime, trueletter, userletter, sequence])
     else:
         log.write([n, fixonset, 'NaN', 'NaN', 'NaN',
-                   'NaN', 'NaN', 'NaN'])
+                   'NaN', 'NaN', 'NaN', sequence])
 
     # Log the end of trial
     tracker.log('TRIAL %s END' % n)
