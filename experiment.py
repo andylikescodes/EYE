@@ -42,26 +42,26 @@ log.write(header)
 kb = Keyboard(keylist=None, timeout=None)
 
 # Initialize Screens
-inscr = Screen()
+inscr = Screen(fgc=COLORS['darkgreen'])
 inscr.draw_text(
             text='Instructions:\nPress ENTER to pick a letter.\n' +
                  'You may press ESCAPE at any time to end the program.\n' +
                  '(Press any key to continue)',
             fontsize=24)
 
-pickscr = Screen()
+pickscr = Screen(fgc=COLORS['darkgreen'])
 pickscr.draw_text(
             text='What letter was on screen when you first decided to move?',
             fontsize=24)
 
-quitscr = Screen()
+quitscr = Screen(fgc=COLORS['darkgreen'])
 quitscr.draw_text(text='Are you sure you want to quit (y/[n])?', fontsize=24)
 
-fixscr = Screen()
+fixscr = Screen(fgc=COLORS['darkgreen'])
 fixscr.draw_fixation(fixtype='cross', pw=2, diameter=16)
 
-imgscr = Screen()
-trialscr = Screen()
+imgscr = Screen(fgc=COLORS['darkgreen'])
+trialscr = Screen(fgc=COLORS['darkgreen'])
 
 # Initialise EyeTracker
 tracker = EyeTracker(disp)
@@ -77,7 +77,7 @@ disp.show()
 check_key(disp, quitscr, inscr)
 
 # Iterate through n trials
-for n in range(1, NUMTRIALS + 1):
+for n in range(1, TRIALS + 1):
 
     # Show trial number then wait for key press
     trialscr.clear()
