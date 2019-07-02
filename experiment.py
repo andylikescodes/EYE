@@ -1,5 +1,7 @@
 import random
 import string
+import time
+import os, glob
 from constants import *
 from pygaze import libtime
 from pygaze.eyetracker import EyeTracker
@@ -67,6 +69,14 @@ trialscr = Screen(fgc=COLORS['darkgreen'])
 tracker = EyeTracker(disp)
 tracker.calibrate()
 
+# Make animation stuff
+def libet_clock(disp):
+    imgscr = Screen()
+    imgscr.draw_image('/Users/Work/Documents/brain/EYE/test.jpg')
+    disp.fill(imgscr)
+    disp.show()
+    key, press = kb.get_key(keylist=['return', 'escape'],
+                        timeout=100)
 
 ''' START EXPERIMENT '''
 
@@ -75,6 +85,39 @@ tracker.calibrate()
 disp.fill(inscr)
 disp.show()
 check_key(disp, quitscr, inscr)
+
+# Test the image
+cwd = os.getcwd()
+asset_path = os.path.join(cwd, 'assets')
+
+file_paths = []
+# for file in os.listdir(asset_path):
+#     if file.endswith(".gif"):
+#         file_paths.append(os.path.join(asset_path, file))
+
+for infile in sorted(glob.glob( os.path.join(asset_path, '*.gif') )):
+    file_paths.append(infile)
+#sorted(glob.glob('*.png'))
+# imgscr.clear()
+# imgscr.draw_image(file_paths[0])
+# print(file_paths[0])
+# disp.fill(imgscr)
+# disp.show()
+# check_key(disp, quitscr, imgscr)
+print(file_paths)
+
+key = ''
+
+while (key != 'escape'):
+    for path in file_paths:
+        imgscr.clear()
+        imgscr.draw_image(path)
+        disp.fill(imgscr)
+        disp.show()
+        key, press = kb.get_key(keylist=['return', 'escape'],
+                        timeout=100)
+    #check_key(disp, quitscr, imgscr)
+
 
 # Iterate through n trials
 for n in range(1, TRIALS + 1):
@@ -110,6 +153,9 @@ for n in range(1, TRIALS + 1):
 
     # list of randomized alphabet to iterate through
     alpha = ''.join(random.sample(string.ascii_lowercase, 26))
+
+
+
 
     # Show alphabet Screen on Display
     for i in range(26):
